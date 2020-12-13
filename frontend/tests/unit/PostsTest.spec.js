@@ -129,4 +129,9 @@ describe('Posts', () => {
 
         }
     })
+    it('correct time format', () => {
+        let time = wrapper.find('.post-author-time')
+        expect(time.text()).toEqual('Saturday, December 5, 2020 1:53 PM')
+    })
+
 });
