@@ -2,6 +2,7 @@ import {mount, createLocalVue} from '@vue/test-utils'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import Posts from "../../src/components/Posts.vue";
+import { post } from '../../../backend/app';
 
 const localVue = createLocalVue();
 
@@ -100,7 +101,32 @@ describe('Posts', () => {
 
     const wrapper = mount(Posts, {router, store, localVue});
 
-    it('1 == 1', function () {
-        expect(true).toBe(true)
+    it('1 == 1', function() {
+        expect(true).toBe(true);
     });
+
+    it('Posts rendered', function () {
+        expect(testData.Posts).toBe(wrapper.get.Posts)
+    });
+
+    it('Media rendered', function (){
+        let items = wrapper.get.Posts;
+        let video = 0;
+        let image = 0;
+        let none = 0;
+
+        for(post in items) {
+            if (post.media.type === "Video") {
+                let video =+ 1;
+            }
+            if (post.media.type === "Image") {
+                let image =+ 1;
+            }
+            if (post.media.type === null) {
+                let none =+ 1;
+        }
+        expect(testData.Posts.length).toBe(video+image+none);
+
+        }
+    })
 });

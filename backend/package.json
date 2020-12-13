@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "db:init": "node sqlite/init.js"
+    "db:init": "node sqlite/init.js",
+    "test": "jest"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
