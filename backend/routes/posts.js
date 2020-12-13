@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const authorize = require('../middlewares/authorize');
 const PostModel = require('../models/PostModel');
+const { post } = require('./users');
 
 
 router.get('/', authorize, (request, response) => {
@@ -22,11 +23,21 @@ router.get('/', authorize, (request, response) => {
 
 });
 
-router.post('/', authorize,  (request, response) => {
-
+router.post('/', authorize, (request, response) => {
     // Endpoint to create a new post
+    let user = request.currentUser.id;
+    let post = request.body;
+    if (post == null) {
+        response.status(400).json();
+    } else {
+        request.body.userId = user;
 
+        PostModel.create(post, () => {
+            response.status(201).json(post);
+        });
+    }
 });
+
 
 
 router.put('/:postId/likes', authorize, (request, response) => {
