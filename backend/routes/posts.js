@@ -47,7 +47,7 @@ router.put('/:postId/likes', authorize, (request, response) => {
         response.json({
             ok: true
         })
-        console.log(this.likes);
+
     })
 });
 
